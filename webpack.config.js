@@ -13,5 +13,8 @@ module.exports = {
       { test: /\.(scss|sass)$/, exclude : /node_modules/, loader : 'style-loader!css-loader!sass-loader' },
       { test: /\.(jpg|png|gif)$/, exclude : /node_modules/, loader : 'url-loader?limit=8192&name=images/[name].[ext]' },
     ]
+  },
+  devServer: {
+    disableHostCheck: true
   }
 }
