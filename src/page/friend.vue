@@ -7,7 +7,7 @@
   </div>
   
   <div id="friends">
-    <div class="friend">
+    <div class="friend" @click="sendMessage">
         <img src="/static/img/1_copy.jpg"/>
           <p>
             <strong>Miro Badev</strong>
@@ -16,7 +16,7 @@
           <div class="status available"></div>
       </div>
       
-      <div class="friend">
+      <div class="friend" @click="sendMessage">
         <img src="/static/img/2_copy.jpg" />
           <p>
             <strong>Martin Joseph</strong>
@@ -25,7 +25,7 @@
           <div class="status away"></div>
       </div>
       
-      <div class="friend">
+      <div class="friend" @click="sendMessage">
         <img src="/static/img/3_copy.jpg" />
           <p>
             <strong>Tomas Kennedy</strong>
@@ -44,9 +44,15 @@
 
 <script>
 import search from './search.vue'
+
 export default {
   components: {
     search
+  },
+  methods : {
+    sendMessage(){
+      this.$router.push('chatMessage');
+    }
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
 <div id="search">
-  <input type="text" id="searchfield" value="Search contacts..." />
+  <input type="text" id="searchfield" placeholder="Search contacts..." />
 </div>
 </template>

@@ -1,9 +1,12 @@
 <template>
-<div class="jq22-container">
+<div id="chat" class="jq22-container">
   <div class="jq22-content bgcolor-3">
     <div id="chatbox">
-      <friend></friend>
-      <chat-message></chat-message>
+      <transition name='transitionName' keep-alive>
+        <router-view></router-view>
+      </transition>
+      <!-- <friend></friend>
+      <chat-message></chat-message> -->
     </div>
   </div>
 </div>
