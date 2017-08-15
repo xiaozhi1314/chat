@@ -62,8 +62,8 @@
     </div>
 
     <div id="sendmessage">
-      <input type="text" placeholder="Send message..." />
-        <button id="send"></button>
+      <input type="text" placeholder="Send message..." v-model="sendData"/>
+      <button id="send" @click="sendMessage"></button>
     </div>
 
   </div>
@@ -71,9 +71,19 @@
 
 <script>
   export default {
+    data(){
+      return{
+        sendData : '',
+        receiveAccount : '',
+      }
+    },
     methods : {
       closeSendView(){
         this.$router.push('chat');
+      },
+      sendMessage(){
+        this.$websocket.send(this.sendData);
+        this.sendData = '';
       }
     }
   }

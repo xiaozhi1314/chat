@@ -13,11 +13,18 @@
 </template>
 
 <script>
+import ChatInstance from '../api/chatInstance'
+
 import friend from './friend.vue'
 import chatMessage from './chat-message.vue'
 export default {
   components: {
     friend, chatMessage
+  },
+  mounted (){
+    ChatInstance.setListeners({
+      listenerMessage : (event) => {console.log(event)}
+    });
   }
 }
 </script>

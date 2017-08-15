@@ -11,7 +11,7 @@ Vue.use(VueRouter)
 
 const routes = [
     {path : '/', name : 'friend', component : friend},
-    // {path : '/chat', name : 'chat', component : chat},
+    {path : '/login', name : 'login', component : login},
     {path : '/friend', name : 'friend', component : friend},
     {path : '/chatMessage', name : 'chatMessage', component : chatMessage},
     {path : '*', name : 'default', component : friend}

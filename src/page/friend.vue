@@ -7,34 +7,17 @@
   </div>
   
   <div id="friends">
-    <div class="friend" @click="sendMessage">
-        <img src="/static/img/1_copy.jpg"/>
-          <p>
-            <strong>Miro Badev</strong>
-            <span>mirobadev@gmail.com</span>
-          </p>
-          <div class="status available"></div>
-      </div>
-      
-      <div class="friend" @click="sendMessage">
-        <img src="/static/img/2_copy.jpg" />
-          <p>
-            <strong>Martin Joseph</strong>
-            <span>marjoseph@gmail.com</span>
-          </p>
-          <div class="status away"></div>
-      </div>
-      
-      <div class="friend" @click="sendMessage">
-        <img src="/static/img/3_copy.jpg" />
-          <p>
-            <strong>Tomas Kennedy</strong>
-            <span>tomaskennedy@gmail.com</span>
-          </p>
-          <div class="status inactive"></div>
-      </div>
-      
-      <search></search>
+
+    <div class="friend" @click="sendMessage(friendItem.id)" v-for="friendItem in friendList" v-bind:key="friendItem.id">
+      <img :src="friendItem.avatar"/>
+        <p>
+          <strong>{{friendItem.name}}</strong>
+          <span>{{friendItem.email}}</span>
+        </p>
+        <div class="status" :class="friendItem.id%2 ? 'available' : 'inactive'"></div>
+    </div>
+    
+    <search></search>
   </div>
     
 </div>
@@ -43,14 +26,21 @@
 
 
 <script>
+import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 import search from './search.vue'
 
 export default {
+  computed : {
+    ...mapState({
+        friendList : state => state.friend.friendList
+      })
+  },
   components: {
     search
   },
   methods : {
-    sendMessage(){
+    sendMessage(receiveAccount){
+      this.$store.commit('setSelectReceive', receiveAccount);
       this.$router.push('chatMessage');
     }
   }
