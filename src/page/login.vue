@@ -22,39 +22,54 @@
 
 <script>
   
-  export default{
-    data (){
-      return {
-        username : '',
-        password : '',
-        msgcontent : '',
+import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
+export default{
+  data (){
+    return {
+      username : '',
+      password : '',
+      msgcontent : '',
+    }
+  },
+  computed : {
+    ...mapState({
+      loginStatus : state => state.loginStatus,
+    })
+  },
+  watch : {
+    loginStatus(newValue, oldValue){
+      if(this.loginStatus === true){
+        this.$router.push('friend');
       }
-    },
-    methods :{
-      userLogin(){
-        let sendMsgData = {
-          'type' : 'login',
-          'room_id' : 1,
-          'client_name' : this.username,
-        }
-        this.$websocket.send(JSON.stringify(sendMsgData));
-        return false;
-      },
-      sendMsg(){
-        let sendMsgData = {
-          'type' : 'say',
-          'room_id' : 1,
-          'to_client_id' : 'all',
-          'content' : this.msgcontent,
-        }
-        ws.send(JSON.stringify(sendMsgData));
-        return false;
+    }
+  },
+  methods :{
+    userLogin(){
+      let sendMsgData = {
+        'type' : 'login',
+        'room_id' : 1,
+        'client_name' : this.username,
       }
+      this.$chatService.onLogin(JSON.stringify(sendMsgData));
+      return false;
     },
-    mounted(){
+    sendMsg(){
+      let sendMsgData = {
+        'type' : 'say',
+        'room_id' : 1,
+        'to_client_id' : 'all',
+        'content' : this.msgcontent,
+      }
+      ws.send(JSON.stringify(sendMsgData));
+      return false;
+    }
+  },
+  mounted(){
+    if(this.loginStatus === true){
+      this.$router.push('friend');
     }
   }
-  
+}
 </script>
 
 <style scoped>

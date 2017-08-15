@@ -34,11 +34,12 @@ function setListeners(listeners={}){
   this.listenerError = listeners.listenerError
   this.listenerMessage = listeners.listenerMessage
 
-  Vue.use(ChatService, 'ws://192.168.20.101:7272', {
+  Vue.use(ChatService, {
     onOpen  : onOpen,
     onClose : onClose,
     onError : onError,
     onMessage : listeners.listenerMessage,
+    url : 'ws://192.168.20.101:7272',
   });
 }
 

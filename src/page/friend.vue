@@ -8,11 +8,11 @@
   
   <div id="friends">
 
-    <div class="friend" @click="sendMessage(friendItem.id)" v-for="friendItem in friendList" v-bind:key="friendItem.id">
-      <img :src="friendItem.avatar"/>
+    <div class="friend" @click="sendMessage(friendKey)" v-for="(friendItem, friendKey) in friendList" v-bind:key="friendItem.id">
+      <img src="/static/img/1_copy.jpg"/>
         <p>
-          <strong>{{friendItem.name}}</strong>
-          <span>{{friendItem.email}}</span>
+          <span>{{friendKey}}</span>
+          <span>{{friendItem}}</span>
         </p>
         <div class="status" :class="friendItem.id%2 ? 'available' : 'inactive'"></div>
     </div>
@@ -32,8 +32,14 @@ import search from './search.vue'
 export default {
   computed : {
     ...mapState({
-        friendList : state => state.friend.friendList
+        // friendList : state => state.friend.friendList,
+        friendList : state => state.clientList,
       })
+  },
+  watch : {
+    friendList(newValue, oldValue){
+
+    }
   },
   components: {
     search

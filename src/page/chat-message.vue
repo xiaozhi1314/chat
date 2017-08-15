@@ -70,21 +70,28 @@
 </template>
 
 <script>
-  export default {
-    data(){
-      return{
-        sendData : '',
-        receiveAccount : '',
-      }
+import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
+export default {
+  data(){
+    return{
+      sendData : '',
+      receiveAccount : '',
+    }
+  },
+  computed : {
+    ...mapState({
+        sender : state => state.clientId,
+        receiver : state => state.friend.selectReceive
+      })
+  },
+  methods : {
+    closeSendView(){
+      this.$router.push('chat');
     },
-    methods : {
-      closeSendView(){
-        this.$router.push('chat');
-      },
-      sendMessage(){
-        this.$websocket.send(this.sendData);
-        this.sendData = '';
-      }
+    sendMessage(){
+      this.$chatService.onSendMsg(this.sender, this.receiver , this.sendData);
+      this.sendData = '';
     }
   }
+}
 </script>

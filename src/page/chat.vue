@@ -13,18 +13,27 @@
 </template>
 
 <script>
-import ChatInstance from '../api/chatInstance'
+import {mapState, mapGetters, mapActions, mapMutations} from 'vuex'
 
-import friend from './friend.vue'
-import chatMessage from './chat-message.vue'
 export default {
-  components: {
-    friend, chatMessage
+  computed : {
+    ...mapState({
+      loginStatus : state => state.loginStatus
+    })
+  },
+  methods : {
+    OnLoginCallback(msg){
+      this.$store.commit('setClientInfo', msg);
+    }
   },
   mounted (){
-    ChatInstance.setListeners({
-      listenerMessage : (event) => {console.log(event)}
+    this.$chatService.startService({
+      url : 'ws://192.168.56.101:7272',
+      OnLoginCallback : this.OnLoginCallback
     });
+    if(this.loginStatus === false){
+      this.$router.push('login');
+    }
   }
 }
 </script>

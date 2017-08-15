@@ -14,7 +14,7 @@ const routes = [
     {path : '/login', name : 'login', component : login},
     {path : '/friend', name : 'friend', component : friend},
     {path : '/chatMessage', name : 'chatMessage', component : chatMessage},
-    {path : '*', name : 'default', component : friend}
+    {path : '*', name : 'default', component : login}
 ];
 
 let router = new VueRouter({
